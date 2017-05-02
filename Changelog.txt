@@ -1,0 +1,4 @@
+Changelog
+
+20170501
+Added initial files for Entity and Stage
