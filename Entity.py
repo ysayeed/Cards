@@ -6,6 +6,7 @@ class Entity:
         self.posy=y
         self.symbol="#" #Error symbol, should never appear
         self.stage=stage
+        self.movepoints=0
         stage.occupy(self,x,y)
         
 
