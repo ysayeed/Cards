@@ -1,4 +1,10 @@
 Changelog
 
+20170504
+Created initial file for Card, created first Card (Basicmove)
+
+20170502
+Created Changelog
+
 20170501
 Added initial files for Entity and Stage
