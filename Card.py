@@ -1,9 +1,8 @@
-import Entity
-
 class Card:
     def __init__(self):
         self.name=None
         self.element=None
+        self.cost=None
     def effect1(self):
         pass
     def effect2(self):
