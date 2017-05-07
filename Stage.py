@@ -57,6 +57,6 @@ class Stage:
         if True:#add movement check
             #swap occupants, movement check will prevent swap of hostile entities
             temp=self.grid[x][y].occupant
-            self.grid[x][y].occupant=self.grid[x+direction[0]][y+direction[1]].occupant
-            self.grid[x+direction[0]][y+direction[1]].occupant=temp
+            self.grid[x][y].occupant=self.grid[x+direction[1]][y+direction[0]].occupant
+            self.grid[x+direction[1]][y+direction[0]].occupant=temp
         
