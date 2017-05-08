@@ -1,5 +1,11 @@
 Changelog
 
+20170508
+Made improvements to Entity
+
+20170506
+Created file for unit tests
+
 20170504
 Created initial file for Card, created first Card (Basicmove)
 

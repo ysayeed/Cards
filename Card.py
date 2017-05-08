@@ -1,3 +1,5 @@
+d={}
+
 class Card:
     def __init__(self):
         self.name=None
@@ -14,3 +16,4 @@ class Basicmove(Card):
         self.name="basicmove"
     def effect1(self, user):
         user.movepoints+=2
+d["basicmove"]=Basicmove

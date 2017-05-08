@@ -1,8 +1,13 @@
+down=(1,0)
+up=(-1,0)
+left=(0,-1)
+right=(0,1) #(row, column)
+d={}
+
 class Tile:
     def __init__(self,x,y):
         self.posx=x
         self.posy=y
-        self.type=None
         self.cost=1
         self.block=False
         self.occupant=None
@@ -12,17 +17,17 @@ class Tile:
 class Empty(Tile):
     def __init__(self,x,y):
         Tile.__init__(self,x,y)
-        self.type="empty"
         self.symbol="."
+d["."]=Empty
 
 class Wall(Tile):
     def __init__(self,x,y):
         Tile.__init__(self,x,y)
-        self.type="wall"
         self.symbol="X"
+d["X"]=Wall
 
 class Stage:
-    d={".":Empty, "X":Wall}
+    #d={".":Empty, "X":Wall}
     def __init__(self,length,height,source):
         self.grid=[]
         self.gridsetup(length,height,source)
@@ -36,7 +41,7 @@ class Stage:
                 c=f.read(1)
                 if (c=="\n"):
                     c=f.read(1)
-                self.grid[i].append(Stage.d[c](i,j))
+                self.grid[i].append(d[c](i,j))
         f.close()
         
     def printgrid(self):
