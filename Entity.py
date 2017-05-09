@@ -13,31 +13,38 @@ class Entity:
         
 
 class Player(Entity):
-    def __init__(self,x,y,stage,symbol):
+    def __init__(self,x,y,stage,symbol,source):
         Entity.__init__(self,x,y,stage)
         self.handlimit=5 #make ability to change that
         self.symbol=symbol
-        self.deck=[]#change to getdeck(name)
+        self.deck=[]
+        self.getdeck(source)
         self.hand=[]
+        self.draw()
         self.grave=[]
         self.mana=()#todo
     def getdeck(self,source):
         f=open(source,"r")
         self.deck=[]
-        for i in range(100):
-            self.deck.append(Card.d[f.readline().strip()]())#test this
+        for i in range(10):#change to 100 when more cards
+            self.deck.append(Card.d[f.readline().strip()]())
+        f.close()
         shuffle(self.deck)
     def draw(self):
-        while(self.hand.size()<self.handlimit):
-            if (self.deck.size!=0):
+        while(len(self.hand)<self.handlimit):
+            if (len(self.deck)!=0):
                 self.hand.append(self.deck.pop(0))
             else:
                 print('no cards in deck') #change later
     def play1(self,c):
+        if c not in self.hand:
+            pass #throw exception
         c.effect1(self)
         self.grave.append(c)
         self.hand.remove(c)
     def play2(self,c):
+        if c not in self.hand:
+            pass #throw exception
         #this one is more complicated, needs for mana, if effect exists, etc
         c.effect2(self)
         self.grave.append(c)
@@ -45,6 +52,7 @@ class Player(Entity):
     def takedamage(self, amount):
         self.grave.extend(self.deck[:amount])
         self.deck=self.deck[amount:]
-        
+    def remainingcards(self):
+        return sorted(self.deck)
 
 #class Summon(Entity):
