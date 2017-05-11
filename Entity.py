@@ -8,6 +8,7 @@ class Entity:
         self.posy=y
         self.symbol="#" #Error symbol, should never appear
         self.movepoints=0
+        self.teleportpoints=0
         self.stage=stage
         stage.occupy(self,x,y)
         
@@ -36,17 +37,17 @@ class Player(Entity):
                 self.hand.append(self.deck.pop(0))
             else:
                 print('no cards in deck') #change later
-    def play1(self,c):
+    def play1(self,c,*args):
         if c not in self.hand:
             pass #throw exception
-        c.effect1(self)
+        c.effect1(self,*args)
         self.grave.append(c)
         self.hand.remove(c)
-    def play2(self,c):
+    def play2(self,c,*args):
         if c not in self.hand:
             pass #throw exception
         #this one is more complicated, needs for mana, if effect exists, etc
-        c.effect2(self)
+        c.effect2(self,*args)
         self.grave.append(c)
         self.hand.remove(c)
     def takedamage(self, amount):
@@ -54,5 +55,15 @@ class Player(Entity):
         self.deck=self.deck[amount:]
     def remainingcards(self):
         return sorted(self.deck)
+    def move(self,direction):
+        if (sum(direction)<=self.movepoints):
+            if (self.stage.move(self.posx,self.posy,direction)):
+                self.movepoints-=sum(direction)
 
-#class Summon(Entity):
+class Summon(Entity):
+    def __init__(self,x,y,stage,symbol):
+        Entity.__init__(self,x,y,stage)
+        self.symbol=symbol
+        self.ai=None
+        self.lifespan=None
+        
