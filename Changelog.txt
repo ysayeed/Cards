@@ -1,5 +1,8 @@
 Changelog
 
+20170511
+Began work on creating summon entity
+
 20170508
 Made improvements to Entity
 
