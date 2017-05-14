@@ -7,7 +7,7 @@ class Test(unittest.TestCase):
     def test_Stage(self):
         s=Stage.Stage(3,3,"teststage.txt")
         self.assertEqual(s.printgrid(),"X.X\nX..\n...\n")
-        e=Entity.Player(1,1,s,"T","testdeck.txt")
+        e=Entity.Player(1,1,s,"T",0,"testdeck.txt")
         self.assertEqual(s.grid[1][1].occupant.symbol,"T")
         self.assertEqual(s.printgrid(),"X.X\nXT.\n...\n")
         s.move(1,1,(0,1))
@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
         self.assertIsNone(s.grid[1][1].occupant)
         self.assertEqual(type(s.grid[0][0]).__name__,"Wall")
         self.assertEqual(type(s.grid[0][1]).__name__,"Empty")
-    def test_Entity(self):
+    def test_Player(self):
         s=Stage.Stage(3,3,"teststage.txt")
-        e=Entity.Player(1,1,s,"T","testdeck.txt")
+        e=Entity.Player(1,1,s,"T",0,"testdeck.txt")
         self.assertEqual(e.posx,1)
         self.assertEqual(e.posy,1)
         self.assertEqual(e.movepoints,0)
@@ -26,11 +26,16 @@ class Test(unittest.TestCase):
         self.assertIsNotNone(s.grid[1][1].occupant)
         self.assertEqual(e.symbol,"T")
         self.assertEqual(e.handlimit,5)
-        #test deck
-        #test hand
-        #test grave
+        self.assertEqual(len(e.hand),5)
+        self.assertEqual(len(e.deck),5) #change this when deck size changes
+        e.play1(e.hand[0])#change this when deck contains more types of Card
+        self.assertEqual(e.movepoints,2)#change this with above
+        self.assertEqual(len(e.hand),4)
+        self.assertEqual(len(e.grave),1)
+        e.draw()
+        self.assertEqual(len(e.hand),5)
+        self.assertEqual(len(e.deck),4)#change when deck size changes
         #test mana
-        #test draw()
         
 
 

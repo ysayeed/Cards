@@ -3,19 +3,20 @@ import Card
 from random import shuffle
 
 class Entity:
-    def __init__(self,x,y,stage): #server should ensure Entity is being created in valid location
+    def __init__(self,x,y,stage,team): #server should ensure Entity is being created in valid location
         self.posx=x
         self.posy=y
         self.symbol="#" #Error symbol, should never appear
         self.movepoints=0
         self.teleportpoints=0
         self.stage=stage
+        self.team=team
         stage.occupy(self,x,y)
         
 
 class Player(Entity):
-    def __init__(self,x,y,stage,symbol,source):
-        Entity.__init__(self,x,y,stage)
+    def __init__(self,x,y,stage,symbol,team,source):
+        Entity.__init__(self,x,y,stage,team)
         self.handlimit=5 #make ability to change that
         self.symbol=symbol
         self.deck=[]
@@ -61,8 +62,8 @@ class Player(Entity):
                 self.movepoints-=sum(direction)
 
 class Summon(Entity):
-    def __init__(self,x,y,stage,symbol):
-        Entity.__init__(self,x,y,stage)
+    def __init__(self,x,y,stage,symbol,team):
+        Entity.__init__(self,x,y,stage.team)
         self.symbol=symbol
         self.ai=None
         self.lifespan=None

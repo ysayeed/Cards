@@ -1,4 +1,6 @@
 Changelog
+20170514
+Updates to unit tests, improvement to entity
 
 20170511
 Began work on creating summon entity
