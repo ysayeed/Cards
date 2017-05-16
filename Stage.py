@@ -57,6 +57,8 @@ class Stage:
     
     def occupy(self,entity,x,y):
         self.grid[x][y].occupant=entity
+    def remove(self,x,y):
+        self.grid[x][y].occupant=None
 
     def move(self,x,y,direction):
         if True:#add movement check

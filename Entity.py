@@ -12,6 +12,8 @@ class Entity:
         self.stage=stage
         self.team=team
         stage.occupy(self,x,y)
+    def endturn(self):
+        pass
         
 
 class Player(Entity):
@@ -60,6 +62,8 @@ class Player(Entity):
         if (sum(direction)<=self.movepoints):
             if (self.stage.move(self.posx,self.posy,direction)):
                 self.movepoints-=sum(direction)
+    def endturn(self):#incomplete
+        self.draw()
 
 class Summon(Entity):
     def __init__(self,x,y,stage,symbol,team):
@@ -67,4 +71,8 @@ class Summon(Entity):
         self.symbol=symbol
         self.ai=None
         self.lifespan=None
-        
+    def endturn(self):
+        if self.lifespan!=None:
+            self.lifespan-=1
+        if self.lifespan==0:
+            self.stage.remove(self.x,self.y)
