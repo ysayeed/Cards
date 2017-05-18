@@ -71,8 +71,24 @@ class Summon(Entity):
         self.symbol=symbol
         self.ai=None
         self.lifespan=None
+        self.hp=None
     def endturn(self):
         if self.lifespan!=None:
             self.lifespan-=1
         if self.lifespan==0:
             self.stage.remove(self.x,self.y)
+    def move(self):
+        if self.ai=="Random":
+            shuffle(Stage.directions)
+            while(not(self.stage.move(self.posx,self.posy,Stage.directions[0]))):
+                shuffle(Stage.directions)
+
+                
+
+class Rat(Summon):
+    def __init__(self,x,y,stage,symbol,team):
+        Summon.__init__(self,x,y,stage,symbol,team)
+        self.ai="Random"
+        self.lifespan=4
+        self.hp=1
+    

@@ -19,10 +19,16 @@ class Basicmove(Card):
 d["basicmove"]=Basicmove
 
 class Basicattack(Card):
-    def __init(self):
+    def __init__(self):
         Card.__init__(self)
         self.name="basicmove"
     def effect1(self,user,*args):
         print("change this")
-
 d["basicattack"]=Basicattack
+
+class Summonrat(Card):
+    def __init__(self):
+        self.name="summonrat"
+    def effect1(self,user,*args):
+        pass:
+d["summonrat"]=Summonrat

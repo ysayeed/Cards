@@ -2,6 +2,7 @@ down=(1,0)
 up=(-1,0)
 left=(0,-1)
 right=(0,1) #(row, column)
+directions=[down,up,left,right]
 d={}
 
 class Tile:
