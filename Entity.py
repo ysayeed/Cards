@@ -72,6 +72,8 @@ class Summon(Entity):
         self.ai=None
         self.lifespan=None
         self.hp=None
+        self.attack="Close"
+        self.damage=1
     def endturn(self):
         if self.lifespan!=None:
             self.lifespan-=1
@@ -82,6 +84,15 @@ class Summon(Entity):
             shuffle(Stage.directions)
             while(not(self.stage.move(self.posx,self.posy,Stage.directions[0]))):
                 shuffle(Stage.directions)
+    def attack(self):
+        if self.attack=="Close":
+            for x in Stage.directions:
+                temp=self.stage[self.posx+x[0]][self.posy+x[1]]
+                if temp.occupant!=None and temp.occupant.team!=self.team:
+                    temp.occupant.takedamage(self.damage)
+                    break
+        else:
+            pass
 
                 
 
