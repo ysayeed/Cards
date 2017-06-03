@@ -67,12 +67,12 @@ class Player(Entity):
 
 class Summon(Entity):
     def __init__(self,x,y,stage,symbol,team):
-        Entity.__init__(self,x,y,stage.team)
+        Entity.__init__(self,x,y,stage,team)
         self.symbol=symbol
         self.ai=None
         self.lifespan=None
         self.hp=None
-        self.attack="Close"
+        self.attacktype=None
         self.damage=1
     def endturn(self):
         if self.lifespan!=None:
@@ -85,9 +85,10 @@ class Summon(Entity):
             while(not(self.stage.move(self.posx,self.posy,Stage.directions[0]))):
                 shuffle(Stage.directions)
     def attack(self):
-        if self.attack=="Close":
+        if self.attacktype=="Close":
             for x in Stage.directions:
-                temp=self.stage[self.posx+x[0]][self.posy+x[1]]
+                #check boundaries, make sure not going out of grid
+                temp=self.stage.grid[self.posx+x[0]][self.posy+x[1]]
                 if temp.occupant!=None and temp.occupant.team!=self.team:
                     temp.occupant.takedamage(self.damage)
                     break
@@ -102,4 +103,5 @@ class Rat(Summon):
         self.ai="Random"
         self.lifespan=4
         self.hp=1
+        self.attacktype="Close"
     

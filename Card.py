@@ -30,5 +30,5 @@ class Summonrat(Card):
     def __init__(self):
         self.name="summonrat"
     def effect1(self,user,*args):
-        pass:
+        pass
 d["summonrat"]=Summonrat

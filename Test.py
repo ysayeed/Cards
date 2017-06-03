@@ -36,6 +36,13 @@ class Test(unittest.TestCase):
         self.assertEqual(len(e.hand),5)
         self.assertEqual(len(e.deck),4)#change when deck size changes
         #test mana
+    def test_Summon(self):
+        s=Stage.Stage(3,3,"teststage.txt")
+        e=Entity.Player(0,1,s,"T",0,"testdeck.txt")
+        r=Entity.Rat(1,1,s,"R",1)
+        r.attack()
+        self.assertEqual(len(e.deck),4)
+        self.assertEqual(len(e.grave),1)
         
 
 
