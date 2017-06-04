@@ -25,6 +25,7 @@ class Wall(Tile):
     def __init__(self,x,y):
         Tile.__init__(self,x,y)
         self.symbol="X"
+        self.block=True
 d["X"]=Wall
 
 class Stage:

@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
     def test_Summon(self):
         s=Stage.Stage(3,3,"teststage.txt")
         e=Entity.Player(0,1,s,"T",0,"testdeck.txt")
-        r=Entity.Rat(1,1,s,"R",1)
+        r=Entity.Rat(0,0,s,"R",1)
         r.attack()
         self.assertEqual(len(e.deck),4)
         self.assertEqual(len(e.grave),1)
