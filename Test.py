@@ -30,6 +30,9 @@ class Test(unittest.TestCase):
         self.assertEqual(len(e.deck),5) #change this when deck size changes
         e.play1(e.hand[0])#change this when deck contains more types of Card
         self.assertEqual(e.movepoints,2)#change this with above
+        e.move(Stage.down)
+        self.assertEqual(e.posx,1)
+        self.assertEqual(e.posy,2)
         self.assertEqual(len(e.hand),4)
         self.assertEqual(len(e.grave),1)
         e.draw()
