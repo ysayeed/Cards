@@ -9,6 +9,7 @@ class Entity:
         self.symbol="#" #Error symbol, should never appear
         self.movepoints=0
         self.teleportpoints=0
+        self.damagereduction=0
         self.stage=stage
         self.team=team
         stage.occupy(self,x,y)
@@ -54,6 +55,7 @@ class Player(Entity):
         self.grave.append(c)
         self.hand.remove(c)
     def takedamage(self, amount):
+        amount=max(amount-self.damagereduction,0)
         self.grave.extend(self.deck[:amount])
         self.deck=self.deck[amount:]
     def remainingcards(self):
@@ -64,6 +66,16 @@ class Player(Entity):
                 self.movepoints-=sum(direction)
     def endturn(self):#incomplete
         self.draw()
+
+class Trap:
+    def __init__(self,x,y,stage,symbol,team):
+        self.posx=x
+        self.posy=y
+        self.stage=stage
+        self.symbol=symbol
+        self.team=team
+        stage.settrap(self,x,y)
+    
 
 class Summon(Entity):
     def __init__(self,x,y,stage,symbol,team):
@@ -110,6 +122,7 @@ class Summon(Entity):
                 if done==True:
                     break
     def takedamage(self, amount):
+        amount=max(amount-self.damagereduction,0)
         self.hp-=amount
         if self.hp<=0:
             self.stage.remove(self.posx,self.posy)
@@ -121,4 +134,11 @@ class Rat(Summon):
         self.lifespan=4
         self.hp=1
         self.attacktype="Close"
+
+class Turret(Summon):
+    def __init__(self,x,y,stage,symbol,team):
+        Summon.__init__(self,x,y,stage,symbol,team)
+        self.ai="None"
+        self.lifespan=5
+        self.hp=10
 

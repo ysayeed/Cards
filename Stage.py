@@ -13,7 +13,7 @@ class Tile:
         self.block=False
         self.occupant=None
         self.symbol=None
-        
+        self.trap=None
     
 class Empty(Tile):
     def __init__(self,x,y):
@@ -59,6 +59,8 @@ class Stage:
     
     def occupy(self,entity,x,y):
         self.grid[x][y].occupant=entity
+    def settrap(self,trap,x,y):
+        self.grid[x][y].trap=trap
     def remove(self,x,y):
         self.grid[x][y].occupant=None
 
